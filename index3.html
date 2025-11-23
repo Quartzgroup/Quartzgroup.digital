@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quartzgroup Technologies</title>
+
+  <style>
+    :root{
+      --bg:#02060b;
+      --bg2:#050c14;
+      --ink:#e9f2ff;
+      --muted:#a9b8cf;
+      --line:rgba(255,255,255,.08);
+      --glass:rgba(255,255,255,.04);
+      --accent:#7fd3ff;
+      --accent2:#9b8cff;
+      --good:#7CFFB2;
+      --warn:#FFD37F;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 70% -10%, #0a1a2c 0%, transparent 60%),
+                  radial-gradient(1000px 700px at 10% 0%, #081420 0%, transparent 55%),
+                  linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      color:var(--ink);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{width:min(1100px, 92vw); margin:0 auto;}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(2,6,11,.9) 0%, rgba(2,6,11,.4) 100%);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.7px;
+    }
+    .brand img{width:36px; height:36px; border-radius:50%;}
+    .nav-links{
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .pill{
+      padding:8px 12px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(255,255,255,.03); font-size:13px; color:var(--muted);
+      transition:.2s ease;
+    }
+    .pill:hover{color:var(--ink); border-color:rgba(255,255,255,.18); transform:translateY(-1px);}
+    .pill.active{color:#0b1118; background:linear-gradient(90deg, var(--accent), var(--accent2)); border-color:transparent; font-weight:650;}
+
+    /* HERO */
+    .hero{
+      position:relative; padding:88px 0 62px; overflow:hidden;
+      border-bottom:1px solid var(--line);
+    }
+    .hero-bg{
+      position:absolute; inset:-20% -10%;
+      background:
+        radial-gradient(600px 300px at 50% 15%, rgba(127,211,255,.25), transparent 60%),
+        radial-gradient(700px 400px at 60% 60%, rgba(155,140,255,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.02), transparent 35%);
+      filter: blur(10px);
+      pointer-events:none;
+    }
+    .hero-content{position:relative; text-align:center;}
+    .hero-logo-wrap{
+      display:flex; justify-content:center; align-items:center; margin-bottom:18px;
+    }
+    .hero-diamond{
+      width: clamp(160px, 18vw, 260px);
+      height:auto;
+      filter: drop-shadow(0 8px 28px rgba(0,0,0,.55));
+      opacity:.98;
+    }
+    .hero-title{
+      font-size: clamp(34px, 6vw, 64px);
+      letter-spacing: 3px;
+      margin:8px 0 4px;
+    }
+    .hero-sub{
+      font-size: clamp(16px, 2.2vw, 22px);
+      color:var(--muted);
+      margin:0 auto 18px;
+      max-width:720px;
+      line-height:1.45;
+    }
+    .hero-cta{
+      display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{
+      padding:10px 14px; border-radius:12px; border:1px solid var(--line);
+      background:rgba(255,255,255,.04); font-weight:600; font-size:14px;
+      transition:.2s ease; display:inline-flex; gap:8px; align-items:center;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.2);}
+    .btn.primary{
+      background:linear-gradient(90deg, rgba(127,211,255,.9), rgba(155,140,255,.9));
+      color:#071018; border-color:transparent;
+      box-shadow:0 10px 30px rgba(127,211,255,.15);
+    }
+    .badges{
+      display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:18px;
+    }
+    .badge{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      background:var(--glass); border:1px solid var(--line); color:var(--muted);
+    }
+
+    /* SECTIONS */
+    section{padding:54px 0;}
+    .section-head{
+      display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:18px;
+    }
+    h2{
+      font-size: clamp(20px, 2.6vw, 28px); margin:0; letter-spacing:.6px;
+    }
+    .subhead{color:var(--muted); font-size:14px}
+
+    .grid{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card{
+      background:var(--glass);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+    }
+
+    /* ECOSYSTEM */
+    .eco-card{grid-column: span 4;}
+    .eco-title{font-weight:700; margin:0 0 8px; font-size:16px;}
+    .eco-desc{color:var(--muted); font-size:14px; line-height:1.5; margin:0;}
+    .eco-tag{display:inline-block; margin-top:10px; font-size:12px; color:#0b1118;
+      background:linear-gradient(90deg, var(--accent), var(--accent2)); padding:4px 8px; border-radius:999px; font-weight:650;}
+
+    /* FLAGSHIPS */
+    .project-card{grid-column: span 6; display:flex; flex-direction:column; gap:8px;}
+    .project-head{display:flex; align-items:center; justify-content:space-between;}
+    .project-title{margin:0; font-size:17px; font-weight:750;}
+    .trl{font-size:12px; padding:4px 8px; border-radius:999px; background:rgba(124,255,178,.12); color:var(--good); border:1px solid rgba(124,255,178,.25); font-weight:650;}
+    .project-desc{margin:0; color:var(--muted); font-size:14px; line-height:1.5;}
+    .project-meta{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto;}
+    .chip{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted);}
+
+    /* NEWS */
+    .news-card{grid-column: span 4; display:flex; flex-direction:column; gap:10px;}
+    .news-title{margin:0; font-weight:700; font-size:15px;}
+    .news-date{font-size:12px; color:var(--muted);}
+    .news-body{color:var(--muted); font-size:14px; line-height:1.5; margin:0;}
+    .news-link{margin-top:auto; font-size:13px; color:var(--accent);}
+
+    /* FOOTER */
+    footer{
+      padding:30px 0 40px; border-top:1px solid var(--line);
+      color:var(--muted); font-size:13px;
+    }
+    .footer-grid{
+      display:grid; gap:12px; grid-template-columns: 1.2fr .8fr .8fr;
+      align-items:start;
+    }
+    .footer-title{color:var(--ink); font-weight:700; margin-bottom:6px;}
+    .footer-list{display:grid; gap:6px;}
+
+    @media (max-width: 900px){
+      .eco-card{grid-column: span 6;}
+      .project-card{grid-column: span 12;}
+      .news-card{grid-column: span 6;}
+      .footer-grid{grid-template-columns:1fr;}
+    }
+    @media (max-width: 560px){
+      .eco-card{grid-column: span 12;}
+      .news-card{grid-column: span 12;}
+      .nav-links{display:none;}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <!-- Replace with new top-left logo when ready -->
+        <img src="assets/diamond.png" alt="Quartzgroup"/>
+        <div>QUARTZGROUP</div>
+      </div>
+      <nav class="nav-links">
+        <a class="pill active" href="#home">HOME</a>
+        <a class="pill" href="#about">ABOUT</a>
+        <a class="pill" href="#projects">PROJECTS</a>
+        <a class="pill" href="#ecosystem">IFT ECOSYSTEM</a>
+        <a class="pill" href="#portfolio">GLOBAL PORTFOLIO</a>
+        <a class="pill" href="#contact">CONTACT</a>
+      </nav>
+      <a class="pill" href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="home">
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container hero-content">
+        <div class="hero-logo-wrap">
+          <img class="hero-diamond" src="assets/diamond.png" alt="Quartzgroup Diamond"/>
+        </div>
+        <h1 class="hero-title">QUARTZGROUP</h1>
+        <p class="hero-sub">
+          Integrated Governance, Intelligence & Strategic Transformation.<br/>
+          Innovation with Purpose. Intelligence with Ethics.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn primary" href="#projects">Explore Flagships</a>
+          <a class="btn" href="#ecosystem">View Ecosystem</a>
+          <a class="btn" href="#contact">Start a Conversation</a>
+        </div>
+
+        <div class="badges">
+          <div class="badge">Quartzgroup Technologies LLC — Delaware, USA</div>
+          <div class="badge">Techsol soluções em Tecnologia Ltda — Brazil</div>
+          <div class="badge">IFT • L.I.S.I. • Sinthesys • Incubatech</div>
+          <div class="badge">AI • Aerospace • Digital Law • Sustainability</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SNAPSHOT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>About Quartzgroup</h2>
+          <div class="subhead">A living ecosystem for global impact</div>
+        </div>
+
+        <div class="grid">
+          <div class="card" style="grid-column: span 7;">
+            <p style="margin:0; color:var(--muted); font-size:15px; line-height:1.7;">
+              Quartzgroup is a global innovation ecosystem designing and deploying integrated solutions in strategic governance,
+              digital transformation, and intelligent organizational learning. Operating through Techsol (Brazil),
+              IFT (training & research), and multiple specialized platforms, we connect academia, industry, and government
+              to accelerate high‑impact technology with ethical AI at its core.
+            </p>
+            <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;">
+              <div class="chip">Integrated Governance</div>
+              <div class="chip">Holistic AI Systems</div>
+              <div class="chip">Public‑Private Innovation</div>
+              <div class="chip">International Partnerships</div>
+            </div>
+          </div>
+
+          <div class="card" style="grid-column: span 5;">
+            <div style="display:grid; gap:10px;">
+              <div>
+                <div style="font-weight:700;">Mission</div>
+                <div style="color:var(--muted); font-size:14px; line-height:1.5;">
+                  Build intelligent, sustainable, and scalable solutions that expand human and institutional capability.
+                </div>
+              </div>
+              <div>
+                <div style="font-weight:700;">Vision</div>
+                <div style="color:var(--muted); font-size:14px; line-height:1.5;">
+                  Become a reference ecosystem for ethical AI, aerospace autonomy, and strategic transformation worldwide.
+                </div>
+              </div>
+              <div>
+                <div style="font-weight:700;">Core Values</div>
+                <div style="color:var(--muted); font-size:14px; line-height:1.5;">
+                  Ethics, scientific rigor, systemic thinking, pragmatic innovation, and social‑environmental responsibility.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ECOSYSTEM -->
+    <section id="ecosystem">
+      <div class="container">
+        <div class="section-head">
+          <h2>IFT Ecosystem (Quartzgroup Tripod)</h2>
+          <div class="subhead">Organizations and networks that operate as one organism</div>
+        </div>
+
+        <div class="grid">
+          <div class="card eco-card">
+            <h3 class="eco-title">Quartzgroup Technologies LLC</h3>
+            <p class="eco-desc">
+              Global strategic nucleus (Delaware, USA). Governance, international alliances,
+              product vision, and ecosystem integration.
+            </p>
+            <div class="eco-tag">Global HQ</div>
+          </div>
+
+          <div class="card eco-card">
+            <h3 class="eco-title">Techsol soluções em Tecnologia Ltda</h3>
+            <p class="eco-desc">
+              Brazilian operational arm delivering consulting, pilots and commercialization
+              of Quartzgroup platforms and products.
+            </p>
+            <div class="eco-tag">Operations</div>
+          </div>
+
+          <div class="card eco-card">
+            <h3 class="eco-title">IFT — Instituto de Formação e Tecnologia</h3>
+            <p class="eco-desc">
+              Training, capacity‑building and applied research.
+              Incubates talent and connects projects to industry and academia.
+            </p>
+            <div class="eco-tag">Training & Research</div>
+          </div>
+
+          <div class="card eco-card">
+            <h3 class="eco-title">L.I.S.I. Research Network</h3>
+            <p class="eco-desc">
+              Laboratory of Integrated Science & Innovation.
+              Multi‑disciplinary R&D with AI, robotics, aerospace and sustainability.
+            </p>
+            <div class="eco-tag">R&D</div>
+          </div>
+
+          <div class="card eco-card">
+            <h3 class="eco-title">Sinthesys Digital Law Network</h3>
+            <p class="eco-desc">
+              International research network in Digital Law and AI governance.
+              Bridges legal frameworks and frontier technologies.
+            </p>
+            <div class="eco-tag">Digital Law</div>
+          </div>
+
+          <div class="card eco-card">
+            <h3 class="eco-title">Incubatech & Venture Studio</h3>
+            <p class="eco-desc">
+              Startup incubation and acceleration pipeline.
+              From TRL‑1 to market‑ready pilot products.
+            </p>
+            <div class="eco-tag">Venture</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLAGSHIP PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>Flagship Projects</h2>
+          <div class="subhead">Strategic products shaping the ecosystem's future</div>
+        </div>
+
+        <div class="grid">
+          <div class="card project-card">
+            <div class="project-head">
+              <h3 class="project-title">H.O.L.O.S. Methodology</h3>
+              <div class="trl">TRL: validated</div>
+            </div>
+            <p class="project-desc">
+              Highly Oriented Lean Organization on Strategy.
+              A proprietary framework integrating governance, lean strategy, IT and people
+              for systemic transformation.
+            </p>
+            <div class="project-meta">
+              <div class="chip">Strategic Governance</div>
+              <div class="chip">Lean Transformation</div>
+              <div class="chip">BSC • Six Sigma • ITIL</div>
+            </div>
+          </div>
+
+          <div class="card project-card">
+            <div class="project-head">
+              <h3 class="project-title">H.A.L.O. Operator (AI)</h3>
+              <div class="trl">TRL: prototyping</div>
+            </div>
+            <p class="project-desc">
+              Holistic Artificial Learning Operator — an AI cognitive system that connects
+              organizational memory, planning and decision‑support into a living architecture.
+            </p>
+            <div class="project-meta">
+              <div class="chip">Holistic AI</div>
+              <div class="chip">Cognitive Architecture</div>
+              <div class="chip">RAG • Agents</div>
+            </div>
+          </div>
+
+          <div class="card project-card">
+            <div class="project-head">
+              <h3 class="project-title">AERO‑Q FIRE</h3>
+              <div class="trl">TRL: design</div>
+            </div>
+            <p class="project-desc">
+              Autonomous aerial system for wildfire prevention, detection and environmental forensics.
+              Integrates drones, AI prediction, and evidence preservation.
+            </p>
+            <div class="project-meta">
+              <div class="chip">Autonomous Drones</div>
+              <div class="chip">Wildfire Tech</div>
+              <div class="chip">GeoAI</div>
+            </div>
+          </div>
+
+          <div class="card project-card">
+            <div class="project-head">
+              <h3 class="project-title">AERO‑Q SHIELD</h3>
+              <div class="trl">TRL: concept</div>
+            </div>
+            <p class="project-desc">
+              Aerospace security and monitoring platform for critical infrastructure and territories,
+              leveraging autonomous robotics and AI‑based threat intelligence.
+            </p>
+            <div class="project-meta">
+              <div class="chip">Aerospace Security</div>
+              <div class="chip">BVLOS</div>
+              <div class="chip">Sensor Fusion</div>
+            </div>
+          </div>
+
+          <!-- updated title: remove DAIA -->
+          <div class="card project-card">
+            <div class="project-head">
+              <h3 class="project-title">Hub Tecnológico</h3>
+              <div class="trl">TRL: planning</div>
+            </div>
+            <p class="project-desc">
+              Integrated innovation hub connecting academia, industry and government
+              for high‑impact technology acceleration.
+            </p>
+            <div class="project-meta">
+              <div class="chip">Innovation Hub</div>
+              <div class="chip">Public‑Private</div>
+              <div class="chip">Talent Pipeline</div>
+            </div>
+          </div>
+
+          <div class="card project-card">
+            <div class="project-head">
+              <h3 class="project-title">PRESERVAR</h3>
+              <div class="trl">TRL: design</div>
+            </div>
+            <p class="project-desc">
+              Cerrado wildfire mitigation initiative combining community engagement,
+              monitoring technologies, and rapid‑response operations.
+            </p>
+            <div class="project-meta">
+              <div class="chip">Cerrado</div>
+              <div class="chip">Environmental Impact</div>
+              <div class="chip">Prevention Network</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLOBAL PORTFOLIO -->
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <h2>Global Portfolio</h2>
+          <div class="subhead">Platforms, programs and future lines</div>
+        </div>
+
+        <div class="grid">
+          <div class="card" style="grid-column: span 4;">
+            <div style="font-weight:750; margin-bottom:6px;">XRSeeds</div>
+            <div style="color:var(--muted); font-size:14px; line-height:1.5;">
+              Extended reality platform for education, simulation and applied innovation.
+            </div>
+          </div>
+          <div class="card" style="grid-column: span 4;">
+            <div style="font-weight:750; margin-bottom:6px;">Aero‑Q Data Lake</div>
+            <div style="color:var(--muted); font-size:14px; line-height:1.5;">
+              Unified geospatial and aerospace intelligence repository powering AERO‑Q products.
+            </div>
+          </div>
+          <div class="card" style="grid-column: span 4;">
+            <div style="font-weight:750; margin-bottom:6px;">HALO Personal</div>
+            <div style="color:var(--muted); font-size:14px; line-height:1.5;">
+              Your strategic personal assistant aligned to H.O.L.O.S., projects and daily execution.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news">
+      <div class="container">
+        <div class="section-head">
+          <h2>Latest Updates</h2>
+          <div class="subhead">Signals, milestones and partnerships</div>
+        </div>
+
+        <div class="grid">
+          <article class="card news-card">
+            <div class="news-date">Nov 2025</div>
+            <h3 class="news-title">FITec Partnership — NDA Review</h3>
+            <p class="news-body">
+              Techsol is finalizing a secure confidentiality framework to initiate HALO prototyping
+              within an EMBRAPII cooperation model.
+            </p>
+            <a class="news-link" href="#contact">Request brief →</a>
+          </article>
+
+          <article class="card news-card">
+            <div class="news-date">Q4 2025</div>
+            <h3 class="news-title">AERO‑Q FIRE — Architecture Consolidation</h3>
+            <p class="news-body">
+              Multi‑layer autonomous wildfire system enters technical consolidation phase,
+              preparing for MVP and TRL elevation.
+            </p>
+            <a class="news-link" href="#projects">See project →</a>
+          </article>
+
+          <article class="card news-card">
+            <div class="news-date">Ongoing</div>
+            <h3 class="news-title">University of Delaware Outreach</h3>
+            <p class="news-body">
+              Opening international dialogue with DSI/CIS/CARS researchers for joint programs,
+              AI governance and aerospace autonomy.
+            </p>
+            <a class="news-link" href="#contact">Collaborate →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <div class="subhead">Let’s build together</div>
+        </div>
+
+        <div class="grid">
+          <div class="card" style="grid-column: span 7;">
+            <div style="display:grid; gap:8px; color:var(--muted); font-size:15px; line-height:1.6;">
+              <div><strong style="color:var(--ink);">Quartzgroup Technologies LLC</strong> — Delaware, USA</div>
+              <div><strong style="color:var(--ink);">Techsol soluções em Tecnologia Ltda</strong> — Anápolis/GO, Brazil</div>
+              <div>Partnerships • Research • Investment • Public Innovation</div>
+            </div>
+          </div>
+
+          <div class="card" style="grid-column: span 5;">
+            <div style="display:grid; gap:10px;">
+              <div>
+                <div class="footer-title">Email</div>
+                <div>contact@quartzgroup.digital</div>
+              </div>
+              <div>
+                <div class="footer-title">LinkedIn</div>
+                <div>Quartzgroup / Techsol / IFT</div>
+              </div>
+              <div>
+                <div class="footer-title">Location</div>
+                <div>Delaware (USA) • Goiás (Brazil)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-title">Quartzgroup</div>
+        <div>
+          Integrated Governance, Intelligence & Strategic Transformation.
+          Innovation with Purpose. Intelligence with Ethics.
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Explore</div>
+        <div class="footer-list">
+          <a href="#projects">Flagships</a>
+          <a href="#ecosystem">Ecosystem</a>
+          <a href="#portfolio">Global Portfolio</a>
+          <a href="#news">Updates</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Legal</div>
+        <div class="footer-list">
+          <div>© 2025 Quartzgroup Technologies LLC</div>
+          <div>All rights reserved.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

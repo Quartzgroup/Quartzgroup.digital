@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Quartzgroup — Innovation with Purpose. Intelligence with Ethics." />
+  <title>Quartzgroup — Innovation with Purpose</title>
+
+  <style>
+    :root{
+      --bg: #05070a;
+      --bg-soft: #0a0f15;
+      --bg-card: rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.07);
+      --text: #e9edf2;
+      --muted: #a8b3c0;
+      --accent: #7fd1ff;
+      --accent-2: #9b8cff;
+      --line: rgba(255,255,255,0.12);
+      --radius: 18px;
+      --radius-lg: 22px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.45);
+      --maxw: 1180px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 70% -10%, #0d1a2b 0%, var(--bg) 55%) fixed;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a{ color: inherit; text-decoration: none; }
+    img{ max-width: 100%; display: block; }
+
+    /* ====== NAV ====== */
+    header{
+      position: sticky;
+      top:0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(5,7,10,0.7);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 10px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+    }
+    .brand-logo{
+      width:64px; height:64px; border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      display:grid; place-items:center;
+      overflow:hidden;
+    }
+    .brand-logo img{ width:100%; height:100%; object-fit:contain; }
+    .brand-name{
+      font-weight: 700; letter-spacing: 0.4px;
+      font-size: 1.05rem;
+    }
+    nav ul{
+      list-style:none; margin:0; padding:0;
+      display:flex; gap:8px; align-items:center;
+    }
+    nav a{
+      font-size: .9rem;
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    nav a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+      border-color: var(--line);
+    }
+    .nav-cta{
+      margin-left:6px;
+      color: var(--text);
+      background: linear-gradient(90deg, rgba(127,209,255,.18), rgba(155,140,255,.18));
+      border: 1px solid var(--line);
+    }
+
+    .hamburger{
+      display:none; cursor:pointer;
+      width:42px; height:42px; border-radius:10px;
+      background: rgba(255,255,255,0.05); border:1px solid var(--line);
+      align-items:center; justify-content:center;
+    }
+    .hamburger span{
+      width:18px; height:2px; background: var(--text);
+      display:block; margin:3px 0;
+    }
+    .mobile-menu{
+      display:none;
+      padding: 8px 16px 14px;
+      border-top:1px solid var(--line);
+    }
+    .mobile-menu a{
+      display:block; padding:10px 8px; color: var(--muted);
+      border-radius:8px;
+    }
+    .mobile-menu a:hover{ background: rgba(255,255,255,0.06); color: var(--text); }
+
+    /* ====== SECTIONS ====== */
+    .container{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    section{ padding: 56px 0; }
+    .section-title{
+      font-size: 1.7rem; font-weight: 700; margin:0 0 10px;
+      letter-spacing: .2px;
+    }
+    .section-sub{
+      color: var(--muted); max-width: 820px; margin:0 0 22px;
+      font-size: 1.02rem;
+    }
+    .grid{
+      display:grid; gap:14px;
+    }
+    .card{
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: .2s ease;
+    }
+    .card:hover{
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ====== HERO ====== */
+    .hero{
+      padding: 6px 0 40px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-wrap{
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items:center;
+      min-height: 66vh;
+    }
+    .hero-kicker{
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .78rem;
+      margin-bottom: 10px;
+    }
+    .hero-title{
+      font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+      font-weight: 800;
+      margin: 0 0 8px;
+      line-height: 1.1;
+    }
+    .hero-title span{
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip:text;
+      color: transparent;
+    }
+    .hero-sub{
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 680px;
+    }
+    .hero-actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 11px 16px; border-radius: 12px;
+      font-weight: 600; font-size: .95rem; letter-spacing:.2px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.05);
+      transition: .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.08); }
+    .btn-primary{
+      background: linear-gradient(90deg, rgba(127,209,255,.25), rgba(155,140,255,.25));
+      border-color: rgba(255,255,255,0.22);
+      color: var(--text);
+    }
+
+    .hero-visual{
+      position:relative;
+      display:grid; place-items:center;
+      padding: 14px;
+    }
+    .hero-ring{
+      width:min(420px, 85vw);
+      aspect-ratio:1/1;
+      border-radius:999px;
+      background:
+        radial-gradient(closest-side, rgba(0,0,0,0.2), transparent 70%),
+        conic-gradient(from 210deg, rgba(127,209,255,.35), rgba(155,140,255,.25), rgba(127,209,255,.35));
+      filter: blur(0.2px);
+      display:grid; place-items:center;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.7), 0 25px 70px rgba(0,0,0,0.6);
+    }
+    .hero-diamond{
+      width: 110%;
+      filter: drop-shadow(0 12px 40px rgba(0,0,0,.65));
+      opacity: .98;
+    }
+    .hero-watermark{
+      position:absolute;
+      inset:auto 0 -50px 0;
+      text-align:center;
+      font-size: clamp(3rem, 9vw, 6.2rem);
+      font-weight: 900;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,0.04);
+      user-select:none;
+      pointer-events:none;
+    }
+
+    /* ====== WHO WE ARE ====== */
+    .pillars{
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .pillar-title{
+      font-weight: 700; margin:0 0 6px; font-size:1.05rem;
+    }
+    .pillar-sub{ color: var(--muted); font-size:.96rem; margin:0; }
+
+    /* ====== TRIADE ====== */
+    .triad{
+      grid-template-columns: repeat(3,1fr);
+    }
+    .triad .card{ padding: 20px; }
+    .tag{
+      display:inline-block; font-size:.75rem; font-weight:700;
+      letter-spacing:.08em; text-transform:uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    /* ====== PROJECTS ====== */
+    .projects{
+      grid-template-columns: repeat(2,1fr);
+    }
+    .project-card{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .project-head{
+      display:flex; justify-content:space-between; align-items:center; gap:8px;
+    }
+    .project-title{ font-weight:800; font-size:1.15rem; margin:0; }
+    .trl{
+      font-size:.8rem; color: var(--muted);
+      padding:4px 8px; border-radius:999px; border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      white-space:nowrap;
+    }
+    .project-desc{ color: var(--muted); margin:0; font-size:.98rem; }
+    .project-actions{ margin-top:4px; }
+
+    /* ====== NEWS ====== */
+    .news-grid{
+      grid-template-columns: repeat(3,1fr);
+    }
+    .news-meta{ color: var(--muted); font-size:.8rem; margin-bottom:6px; }
+    .news-title{ margin:0 0 6px; font-weight:700; }
+    .news-desc{ margin:0; color: var(--muted); font-size:.95rem; }
+
+    /* ====== VISION ====== */
+    .vision{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .vision-quote{
+      font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+      font-weight: 700;
+      text-align:center;
+      margin:0 auto;
+      max-width: 900px;
+    }
+    .vision-quote span{
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+
+    /* ====== FOOTER ====== */
+    footer{
+      padding: 34px 0 40px; color: var(--muted);
+    }
+    .footer-grid{
+      display:grid; grid-template-columns: 1.5fr repeat(3,1fr); gap:16px;
+    }
+    .footer-title{ color: var(--text); font-weight:700; margin:0 0 8px; }
+    .footer-list{ list-style:none; margin:0; padding:0; display:grid; gap:6px; font-size:.95rem; }
+    .footer-list a:hover{ color: var(--text); }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 980px){
+      .hero-wrap{ grid-template-columns: 1fr; min-height:auto; padding-top:10px; }
+      .pillars, .triad, .news-grid{ grid-template-columns: 1fr; }
+      .projects{ grid-template-columns: 1fr; }
+      .footer-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 720px){
+      nav ul{ display:none; }
+      .hamburger{ display:flex; }
+      .mobile-menu{ display:block; }
+      .footer-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== NAV ===== -->
+  <header>
+    <div class="nav-wrap">
+      <a class="brand" href="#home">
+        <div class="brand-logo">
+          <img src="assets/img/logo-quartzgroup.png" alt="Quartzgroup logo" onerror="this.style.display='none'">
+        </div>
+        <div class="brand-name">QUARTZGROUP</div>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#ecosystem">Ecosystem</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a class="nav-cta" href="#partnerships">Partnerships</a></li>
+        </ul>
+      </nav>
+
+      <div class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="mobile-menu container" id="mobileMenu" style="display:none;">
+      <a href="#home">Home</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="#projects">Projects</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="#partnerships">Partnerships</a>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <main id="home" class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <div class="hero-kicker">Innovation with Purpose · Intelligence with Ethics</div>
+        <h1 class="hero-title">
+          A Global Ecosystem for <span>Intelligent Transformation</span>
+        </h1>
+        <p class="hero-sub">
+          Quartzgroup combines strategic governance, cognitive artificial intelligence,
+          and integrated technologies to build high-impact solutions for public and
+          private institutions worldwide.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#ecosystem">Explore the Ecosystem</a>
+          <a class="btn" href="#projects">Explore Projects</a>
+          <a class="btn" href="#partnerships">Partner with us</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-ring">
+          <img class="hero-diamond" src="assets/img/diamond3.png" alt="Quartzgroup Diamond"
+               onerror="this.style.opacity='.4'">
+        </div>
+      </div>
+    </div>
+    <div class="hero-watermark">QUARTZGROUP</div>
+  </main>
+
+  <!-- ===== WHO WE ARE ===== -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Who We Are</h2>
+      <p class="section-sub">
+        Quartzgroup is a living ecosystem uniting research, innovation and ethical
+        intelligence to accelerate digital transformation with scientific rigor.
+      </p>
+
+      <div class="grid pillars">
+        <div class="card">
+          <h3 class="pillar-title">AI & Cognitive Systems (HALO)</h3>
+          <p class="pillar-sub">
+            Holistic Artificial Learning Operator — a cognitive AI platform for
+            strategic learning and intelligent decision environments.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="pillar-title">Aerospace & Autonomous Platforms (AERO-Q)</h3>
+          <p class="pillar-sub">
+            Multi-layer autonomous aerial systems for environmental intelligence,
+            wildfire prevention and defense.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="pillar-title">Governance & Strategic Transformation (H.O.L.O.S.)</h3>
+          <p class="pillar-sub">
+            A lean strategic governance methodology integrating people, technology
+            and measurable impact.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STRATEGIC TRIAD ===== -->
+  <section id="ecosystem">
+    <div class="container">
+      <h2 class="section-title">The Ecosystem Triad</h2>
+      <p class="section-sub">
+        Quartzgroup operates through a strategic triad, ensuring scientific depth,
+        applied engineering and global governance under a unified vision.
+      </p>
+
+      <div class="grid triad">
+        <div class="card">
+          <div class="tag">Global Holding</div>
+          <h3 class="pillar-title">Quartzgroup Technologies LLC (Delaware, USA)</h3>
+          <p class="pillar-sub">
+            Global operations, governance, international partnerships and IP holding.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Applied Engineering</div>
+          <h3 class="pillar-title">Techsol Soluções em Tecnologia Ltda (Brazil)</h3>
+          <p class="pillar-sub">
+            Industry-grade engineering, productization, MVPs and real-world deployment.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Research Base</div>
+          <h3 class="pillar-title">IFT — Instituto de Formação & Tecnologia (Brazil)</h3>
+          <p class="pillar-sub">
+            Research, education, laboratories and scientific networks powering innovation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FLAGSHIP PROJECTS ===== -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Flagship Projects</h2>
+      <p class="section-sub">
+        Our projects are designed as modular programs that reinforce one another,
+        creating scalable impact and rapid technological maturation.
+      </p>
+
+      <div class="grid projects">
+        <div class="card project-card">
+          <div class="project-head">
+            <h3 class="project-title">HALO</h3>
+            <div class="trl">TRL: evolving</div>
+          </div>
+          <p class="project-desc">
+            Holistic Artificial Learning Operator — cognitive AI for intelligent
+            organizational learning, strategic planning and adaptive decision systems.
+          </p>
+          <div class="project-actions">
+            <a class="btn" href="projects/halo.html">Learn more</a>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <div class="project-head">
+            <h3 class="project-title">H.O.L.O.S.</h3>
+            <div class="trl">TRL: validated method</div>
+          </div>
+          <p class="project-desc">
+            Highly Oriented Lean Organization on Strategy — a strategic governance
+            methodology integrating people and digital intelligence.
+          </p>
+          <div class="project-actions">
+            <a class="btn" href="projects/holos.html">Learn more</a>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <div class="project-head">
+            <h3 class="project-title">AERO-Q FIRE</h3>
+            <div class="trl">TRL: 3→6</div>
+          </div>
+          <p class="project-desc">
+            Autonomous aerial system for wildfire detection, prediction and
+            environmental forensics across large territories.
+          </p>
+          <div class="project-actions">
+            <a class="btn" href="projects/aeroq-fire.html">Learn more</a>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <div class="project-head">
+            <h3 class="project-title">AERO-Q SHIELD</h3>
+            <div class="trl">TRL: 2→5</div>
+          </div>
+          <p class="project-desc">
+            Advanced aerial defense and interception platform integrating autonomous
+            robotics and real-time intelligence.
+          </p>
+          <div class="project-actions">
+            <a class="btn" href="projects/aeroq-shield.html">Learn more</a>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <div class="project-head">
+            <h3 class="project-title">PRESERVAR</h3>
+            <div class="trl">TRL: pilot stage</div>
+          </div>
+          <p class="project-desc">
+            Cerrado wildfire mitigation initiative combining drones, AI and
+            community-based prevention systems.
+          </p>
+          <div class="project-actions">
+            <a class="btn" href="projects/preservar.html">Learn more</a>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <div class="project-head">
+            <h3 class="project-title">Technological Hub</h3>
+            <div class="trl">TRL: planning</div>
+          </div>
+          <p class="project-desc">
+            Integrated innovation hub connecting academia, industry and government
+            for high-impact technology acceleration.
+          </p>
+          <div class="project-actions">
+            <a class="btn" href="projects/technological-hub/technological-hub.html">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEWS & INSIGHTS ===== -->
+  <section>
+    <div class="container">
+      <div style="display:flex; align-items:end; justify-content:space-between; gap:12px; flex-wrap:wrap">
+        <div>
+          <h2 class="section-title">News & Insights</h2>
+          <p class="section-sub">
+            Updates from our ecosystem, partnerships and technology roadmap.
+          </p>
+        </div>
+        <a class="btn" href="news.html">View all insights</a>
+      </div>
+
+      <div class="grid news-grid" id="newsGrid">
+        <!-- Cards entram via JS; fallback simples abaixo -->
+        <div class="card">
+          <div class="news-meta">Coming soon</div>
+          <h3 class="news-title">Ecosystem updates</h3>
+          <p class="news-desc">Latest milestones will appear here.</p>
+        </div>
+        <div class="card">
+          <div class="news-meta">Coming soon</div>
+          <h3 class="news-title">Research & partnerships</h3>
+          <p class="news-desc">Academic and industry collaborations.</p>
+        </div>
+        <div class="card">
+          <div class="news-meta">Coming soon</div>
+          <h3 class="news-title">Product roadmap</h3>
+          <p class="news-desc">HALO, H.O.L.O.S., AERO-Q and PRESERVAR.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GLOBAL VISION ===== -->
+  <section class="vision" id="partnerships">
+    <div class="container">
+      <p class="vision-quote">
+        We design the future with responsibility, scientific rigor and
+        <span>ethical intelligence</span>.
+      </p>
+      <div style="display:flex; justify-content:center; margin-top:14px;">
+        <a class="btn btn-primary" href="contact.html">Start a conversation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-title">Quartzgroup</div>
+        <p style="margin:0 0 10px; font-size:.98rem;">
+          Innovation with Purpose. Intelligence with Ethics.
+        </p>
+        <p style="margin:0; font-size:.9rem;">
+          Global ecosystem for strategic governance, cognitive AI and integrated technologies.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-title">Ecosystem</div>
+        <ul class="footer-list">
+          <li><a href="#ecosystem">Triad Overview</a></li>
+          <li><a href="ecosystem/quartzgroup.html">Quartzgroup LLC</a></li>
+          <li><a href="ecosystem/techsol.html">Techsol</a></li>
+          <li><a href="ecosystem/ift.html">IFT</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-title">Projects</div>
+        <ul class="footer-list">
+          <li><a href="projects/halo.html">HALO</a></li>
+          <li><a href="projects/holos.html">H.O.L.O.S.</a></li>
+          <li><a href="projects/aeroq-fire.html">AERO-Q FIRE</a></li>
+          <li><a href="projects/aeroq-shield.html">AERO-Q SHIELD</a></li>
+          <li><a href="projects/preservar.html">PRESERVAR</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-title">Connect</div>
+        <ul class="footer-list">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="news.html">News & Insights</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><a href="#" target="_blank" rel="noreferrer">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top:18px; font-size:.85rem; color:var(--muted);">
+      © <span id="year"></span> Quartzgroup Technologies LLC · All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // mobile menu toggle
+    const ham = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    ham.addEventListener('click', () => {
+      const open = menu.style.display === 'block';
+      menu.style.display = open ? 'none' : 'block';
+    });
+
+    // news data (troque quando quiser)
+    const news = [
+      {
+        date: "Nov 2025",
+        title: "HALO preliminary partnership under NDA",
+        desc: "We initiated a preliminary cooperation framework to accelerate HALO’s MVP and global roadmap.",
+        href: "news/halo-nda.html"
+      },
+      {
+        date: "Nov 2025",
+        title: "AERO-Q FIRE & SHIELD architecture maturation",
+        desc: "AERO-Q enters a new phase of technical documentation and TRL elevation with strategic partners.",
+        href: "news/aeroq-maturation.html"
+      },
+      {
+        date: "Upcoming",
+        title: "University of Delaware collaboration cycle",
+        desc: "Preparing the academic bridge for joint research and advanced innovation programs.",
+        href: "news/udel-bridge.html"
+      }
+    ];
+
+    const grid = document.getElementById('newsGrid');
+    if(grid){
+      grid.innerHTML = news.map(n => `
+        <a class="card" href="${n.href}">
+          <div class="news-meta">${n.date}</div>
+          <h3 class="news-title">${n.title}</h3>
+          <p class="news-desc">${n.desc}</p>
+        </a>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
+
