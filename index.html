@@ -14,11 +14,15 @@
   <header>
     <div class="nav-wrap">
       <a class="brand" href="#home">
-        <!-- LOGO MAIOR + SEM TRANSFORM (para não cruzar a linha) -->
-        <div class="brand-logo" style="width: 96px; height: 96px;">
-          <img src="assets/img/logo-quartzgroup.png" alt="Quartzgroup logo" onerror="this.style.display='none'">
+        <!-- LOGO AGORA EM DOBRO DO TAMANHO ANTERIOR -->
+        <div class="brand-logo" style="width: 192px; height: 192px;">
+          <img
+            src="assets/img/logo-quartzgroup.png"
+            alt="Quartzgroup logo"
+            style="width:100%; height:100%; object-fit:contain;"
+            onerror="this.style.display='none'">
         </div>
-        <!-- brand-name removido na versão anterior -->
+        <!-- brand-name removido nas versões anteriores -->
       </a>
 
       <nav>
@@ -345,55 +349,4 @@
       </div>
     </div>
 
-    <div class="container" style="margin-top:18px; font-size:.85rem; color:var(--muted);">
-      © <span id="year"></span> Quartzgroup Technologies LLC · All rights reserved.
-    </div>
-  </footer>
-
-  <script>
-    // year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // mobile menu toggle
-    const ham = document.getElementById('hamburger');
-    const menu = document.getElementById('mobileMenu');
-    ham.addEventListener('click', () => {
-      const open = menu.style.display === 'block';
-      menu.style.display = open ? 'none' : 'block';
-    });
-
-    // news data (troque quando quiser)
-    const news = [
-      {
-        date: "Nov 2025",
-        title: "HALO preliminary partnership under NDA",
-        desc: "We initiated a preliminary cooperation framework to accelerate HALO’s MVP and global roadmap.",
-        href: "news/halo-partnership.html"
-      },
-      {
-        date: "Nov 2025",
-        title: "AERO-Q FIRE & SHIELD architecture maturation",
-        desc: "AERO-Q enters a new phase of technical documentation and TRL elevation with strategic partners.",
-        href: "news/aeroq-maturation.html"
-      },
-      {
-        date: "Upcoming",
-        title: "International Academic Collaboration Outlook",
-        desc: "We are preparing a structured approach for collaboration with international universities in North America and Europe.",
-        href: "news/international-collaboration.html"
-      }
-    ];
-
-    const grid = document.getElementById('newsGrid');
-    if(grid){
-      grid.innerHTML = news.map(n => `
-        <a class="card" href="${n.href}">
-          <div class="news-meta">${n.date}</div>
-          <h3 class="news-title">${n.title}</h3>
-          <p class="news-desc">${n.desc}</p>
-        </a>
-      `).join('');
-    }
-  </script>
-</body>
-</html>
+ 
